@@ -1,0 +1,55 @@
+\documentclass{beamer}
+
+\begin{document}
+\title{Comparison Barplots}
+\author{Kimberly Staudt}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Install and Load Libraries}
+\begin{frame}[fragile]
+  \frametitle{Install and Load Libraries}
+  \begin{itemize}
+  \item<1->
+    <<warning=FALSE,message=FALSE>>=
+      library(gutenbergr)
+    @
+  \item<2->
+    <<warning=FALSE,message=FALSE>>=
+      library(dplyr)
+    @
+  \item<3->
+    <<warning=FALSE,message=FALSE>>=
+      library(tidytext)
+    @
+  \item<4->
+    <<warning=FALSE,message=FALSE>>=
+      library(stringr)
+    @
+  \item<5->
+    <<warning=FALSE,message=FALSE>>=
+      library(ggplot2)
+    @
+  
+  
+  \end{itemize}
+\end{frame}
+
+
+\section{Acess Project Gutenbergr}
+\being{frame}[fragile]
+  \frametitle{Access Project Gutenbergr}
+  <<warning=FALSE, messmessage=FALSE>>=
+    df<-gutenberg_works(str_detect(title,'Dracula'))
+    df$gutenberg_id
+    df$title
+  @
+\end{frame}
+
+
+
+
+
+\end{document}
