@@ -1,2 +1,0 @@
-\beamer@sectionintoc {1}{Install and Load Libraries}{2}{0}{1}
-\beamer@sectionintoc {2}{Acess Project Gutenbergr}{7}{0}{2}

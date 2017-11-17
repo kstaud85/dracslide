@@ -1,0 +1,21 @@
+\frametitle{Inner Join}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{dracula_words}\hlkwb{<-}\hlkwd{inner_join}\hlstd{(dracula_words,bing)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in inner\_join(dracula\_words, bing): object 'dracula\_words' not found}}\begin{alltt}
+  \hlstd{dracula_words}\hlopt{$}\hlstd{gutenberg_id}\hlkwb{<-}\hlkwa{NULL}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in dracula\_words\$gutenberg\_id <- NULL: object 'dracula\_words' not found}}\begin{alltt}
+  \hlstd{dracula_words[}\hlnum{498}\hlopt{:}\hlnum{500}\hlstd{,]}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'dracula\_words' not found}}\end{kframe}
+\end{knitrout}
+

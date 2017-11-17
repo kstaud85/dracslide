@@ -1,0 +1,99 @@
+\documentclass{beamer}
+
+\begin{document}
+
+\title{Comparison Barplots}
+\author{Kimberly Staudt}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Outline}
+    \tableofcontents
+\end{frame}
+
+\section{Install and Load Libraries}
+\begin{frame}[fragile]
+  \frametitle{Install and Load Libraries}
+    \begin{itemize}
+      \item<1->
+        <<warning=FALSE,message=FALSE>>=
+        library(dplyr)
+        @
+      \item<2->
+        <<warning=FALSE,message=FALSE>>=
+        library(tidytext)
+        @
+    \item<3->
+        <<warning=FALSE,message=FALSE>>=
+        library(gutenbergr)
+        @
+    \item<4->
+        <<warning=FALSE,message=FALSE>>=
+        library(ggplot2)
+        @
+    \item<5->
+        <<warning=FALSE,message=FALSE>>=
+        library(stringr)
+        @
+    
+    \end{itemize}
+\end{frame}
+
+\section{Access Project Gutenberg}
+\begin{frame}[fragile]
+  \frametitle{Access Project Gutenberg}
+    <<message=FALSE,warning=FALSE>>=
+    df<-gutenberg_works(str_detect(title,'Dracula'))
+    df$gutenberg_id
+    df$title
+    @
+\end{frame}
+
+\section{Download Dracula}
+\begin{frame}[fragile]
+  \frametitle{Download Dracula}
+  <<>>=
+  dracula<-gutenberg_download(341)
+      colnames(dracula)
+  substr(dracula$text[500],1,21)
+  @
+
+\end{frame}
+
+\section{Unpack the Words}
+\begin{frame}[fragile]
+  \frametitle{Unpack the Words}
+  <<warning=FALSE,message=FALSE>>=
+  dracula_words<dracula%>%
+    unnest_tolkens(word,text)%>%
+    colnames(dracula_words)
+    dracula_words$word[500,]
+  @
+ \end{frame}
+
+ \section {The Bing Lexicon}
+ \begin{frame}[fragile]
+ \frametitle {The Bing Lexicon}
+  <<>>=
+  bing<-get_sentiments('bing')
+    colnames(bing)
+    bing(498:500,)
+  @
+  \end{frame}
+ 
+\section{Inner Join}
+\begin{frame}[fragile]
+\frametitle{Inner Join}
+  <<>>=
+    dracula_words<-inner_join(dracula_words,bing)
+    dracula_words$gutenberg_id<-NULL
+    dracula_words[498:500,]
+  @
+
+\end{frame}
+
+
+\end{document}
