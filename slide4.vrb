@@ -1,21 +1,46 @@
-\frametitle{Inner Join}
+\frametitle{The Comparison Barplot}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-  \hlstd{dracula_words}\hlkwb{<-}\hlkwd{inner_join}\hlstd{(dracula_words,bing)}
+\hlstd{dracula_pos}\hlopt{$}\hlstd{word}\hlkwb{<-}\hlkwd{factor}\hlstd{(dracula_pos}\hlopt{$}\hlstd{word,}
+                         \hlkwc{levels}\hlstd{=dracula_pos}\hlopt{$}\hlstd{word)}
 \end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in inner\_join(dracula\_words, bing): object 'dracula\_words' not found}}\begin{alltt}
-  \hlstd{dracula_words}\hlopt{$}\hlstd{gutenberg_id}\hlkwb{<-}\hlkwa{NULL}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in factor(dracula\_pos\$word, levels = dracula\_pos\$word): object 'dracula\_pos' not found}}\begin{alltt}
+\hlstd{dracula_neg}\hlopt{$}\hlstd{word}\hlkwb{<-}\hlkwd{factor}\hlstd{(dracula_neg}\hlopt{$}\hlstd{word,}
+                         \hlkwc{levels}\hlstd{=dracula_neg}\hlopt{$}\hlstd{word)}
 \end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in dracula\_words\$gutenberg\_id <- NULL: object 'dracula\_words' not found}}\begin{alltt}
-  \hlstd{dracula_words[}\hlnum{498}\hlopt{:}\hlnum{500}\hlstd{,]}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in factor(dracula\_neg\$word, levels = dracula\_neg\$word): object 'dracula\_neg' not found}}\begin{alltt}
+\hlstd{dracula_comp}\hlkwb{<-}\hlkwd{rbind}\hlstd{(dracula_pos,dracula_neg)}
 \end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'dracula\_words' not found}}\end{kframe}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in rbind(dracula\_pos, dracula\_neg): object 'dracula\_pos' not found}}\begin{alltt}
+\hlstd{plot}\hlkwb{<-}\hlkwd{ggplot}\hlstd{()}\hlopt{+}
+\hlkwd{geom_bar}\hlstd{(}\hlkwc{data}\hlstd{=dracula_comp,}\hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=word,}\hlkwc{y}\hlstd{=count,}
+\hlkwc{fill}\hlstd{=sentiment,} \hlkwc{color}\hlstd{=sentiment),}\hlkwc{stat}\hlstd{=}\hlstr{'identity'}\hlstd{)}\hlopt{+}
+\hlkwd{coord_flip}\hlstd{()}\hlopt{+}
+\hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{sentiment,}\hlkwc{scales}\hlstd{=}\hlstr{'free_y'}\hlstd{)}\hlopt{+}
+\hlkwd{scale_fill_manual}\hlstd{(}\hlkwc{values}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{'black'}\hlstd{,}\hlstr{'#ea6205'}\hlstd{))}\hlopt{+}
+\hlkwd{scale_color_manual}\hlstd{(}\hlkwc{values}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{'#ea6205'}\hlstd{,}\hlstr{'black'}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fortify(data): object 'dracula\_comp' not found}}\end{kframe}
+\end{knitrout}
+
+\framebreak
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## function (x, y, ...)
+## UseMethod("plot")
+## <bytecode: 0x0000000013aa9af8>
+## <environment: namespace:graphics>
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 

@@ -1,3 +1,4 @@
+
 \documentclass{beamer}\usepackage[]{graphicx}\usepackage[]{color}
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
@@ -141,12 +142,6 @@
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{dracula}\hlkwb{<-}\hlkwd{gutenberg_download}\hlstd{(}\hlnum{341}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Determining mirror for Project Gutenberg from http://www.gutenberg.org/robot/harvest}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Using mirror http://aleph.gutenberg.org}}\begin{alltt}
     \hlkwd{colnames}\hlstd{(dracula)}
 \end{alltt}
 \begin{verbatim}
@@ -226,6 +221,98 @@
 
 
 {\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'dracula\_words' not found}}\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\section{Top Ten Positive Words}
+\begin{frame}[allowframebreaks,fragile]
+  \frametitle{Top Ten Positive Words}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{dracula_pos}\hlkwb{<-}\hlstd{dracula_words}\hlopt{%>%}
+  \hlkwd{filter}\hlstd{(sentiment}\hlopt{==}\hlstr{'positive'}\hlstd{)}\hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(word)}\hlopt{%>%}
+  \hlkwd{summarize}\hlstd{(}\hlkwc{count}\hlstd{=}\hlkwd{n}\hlstd{(),}\hlkwc{sentiment}\hlstd{=}\hlkwd{first}\hlstd{(sentiment))}\hlopt{%>%}
+  \hlkwd{arrange}\hlstd{(count)}\hlopt{%>%}
+  \hlkwd{top_n}\hlstd{(}\hlnum{10}\hlstd{,}\hlkwc{wt}\hlstd{=count)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(lhs, parent, parent): object 'dracula\_words' not found}}\end{kframe}
+\end{knitrout}
+\framebreak
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlstd{dracula_pos}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'dracula\_pos' not found}}\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\section{Top Ten Negative Words}
+\begin{frame}[fragile]
+  \frametitle{Top Ten Negative Words}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(lhs, parent, parent): object 'dracula\_words' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'dracula\_neg' not found}}\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]
+  \frametitle{The Comparison Barplot}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{dracula_pos}\hlopt{$}\hlstd{word}\hlkwb{<-}\hlkwd{factor}\hlstd{(dracula_pos}\hlopt{$}\hlstd{word,}
+                         \hlkwc{levels}\hlstd{=dracula_pos}\hlopt{$}\hlstd{word)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in factor(dracula\_pos\$word, levels = dracula\_pos\$word): object 'dracula\_pos' not found}}\begin{alltt}
+\hlstd{dracula_neg}\hlopt{$}\hlstd{word}\hlkwb{<-}\hlkwd{factor}\hlstd{(dracula_neg}\hlopt{$}\hlstd{word,}
+                         \hlkwc{levels}\hlstd{=dracula_neg}\hlopt{$}\hlstd{word)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in factor(dracula\_neg\$word, levels = dracula\_neg\$word): object 'dracula\_neg' not found}}\begin{alltt}
+\hlstd{dracula_comp}\hlkwb{<-}\hlkwd{rbind}\hlstd{(dracula_pos,dracula_neg)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in rbind(dracula\_pos, dracula\_neg): object 'dracula\_pos' not found}}\begin{alltt}
+\hlstd{plot}\hlkwb{<-}\hlkwd{ggplot}\hlstd{()}\hlopt{+}
+\hlkwd{geom_bar}\hlstd{(}\hlkwc{data}\hlstd{=dracula_comp,}\hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=word,}\hlkwc{y}\hlstd{=count,}
+\hlkwc{fill}\hlstd{=sentiment,} \hlkwc{color}\hlstd{=sentiment),}\hlkwc{stat}\hlstd{=}\hlstr{'identity'}\hlstd{)}\hlopt{+}
+\hlkwd{coord_flip}\hlstd{()}\hlopt{+}
+\hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{sentiment,}\hlkwc{scales}\hlstd{=}\hlstr{'free_y'}\hlstd{)}\hlopt{+}
+\hlkwd{scale_fill_manual}\hlstd{(}\hlkwc{values}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{'black'}\hlstd{,}\hlstr{'#ea6205'}\hlstd{))}\hlopt{+}
+\hlkwd{scale_color_manual}\hlstd{(}\hlkwc{values}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{'#ea6205'}\hlstd{,}\hlstr{'black'}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fortify(data): object 'dracula\_comp' not found}}\end{kframe}
+\end{knitrout}
+
+\framebreak
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## function (x, y, ...) 
+## UseMethod("plot")
+## <bytecode: 0x0000000013aa9af8>
+## <environment: namespace:graphics>
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 
 \end{frame}

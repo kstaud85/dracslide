@@ -4,3 +4,5 @@
 \beamer@sectionintoc {4}{Unpack the Words}{10}{0}{4}
 \beamer@sectionintoc {5}{The Bing Lexicon}{11}{0}{5}
 \beamer@sectionintoc {6}{Inner Join}{12}{0}{6}
+\beamer@sectionintoc {7}{Top Ten Positive Words}{13}{0}{7}
+\beamer@sectionintoc {8}{Top Ten Negative Words}{15}{0}{8}
